@@ -25,6 +25,12 @@ provider:
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
   profile: serverlessUser
+  vpc:
+    securityGroupIds:
+      - sg-81eaa099
+    subnetIds:
+      - subnet-e1fbe3ac
+      - subnet-94c3c19a
 
 # you can overwrite defaults here
 #  stage: dev
@@ -128,6 +134,17 @@ functions:
                     type: COGNITO_USER_POOLS
                     authorizerId:
                       Ref: ApiGatewayAuthorizer
+    getPeopleFromRDS:
+        handler: lambdas/getPeopleFromRDS.handler
+        events:
+            - http:
+                  path: get-peoples
+                  method: GET
+                  cors: true
+                  authorizer:
+                    type: COGNITO_USER_POOLS
+                    authorizerId:
+                      Ref: ApiGatewayAuthorizer
                 
 resources:
   Resources:
@@ -166,6 +183,17 @@ resources:
         Type: COGNITO_USER_POOLS
         ProviderARNs:
           - Fn::GetAtt: [CognitoUserPool, Arn]
+    MyDB:
+      Type: AWS::RDS::DBInstance
+      Properties:
+        DBInstanceIdentifier: demodb
+        AllocatedStorage: '5'
+        DBInstanceClass: db.t2.micro
+        Engine: MySQL
+        MasterUsername: admin
+        MasterUserPassword: password
+        PubliclyAccessible: true
+        Port: 3306
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

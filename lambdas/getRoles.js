@@ -1,4 +1,18 @@
 
+  exports.handler = async event => {
+    console.log('event', event);
+
+    return {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials' : true 
+        },
+        statusCode: 200,
+        body: JSON.stringify(roles)
+    };
+};
 const roles=[{
     "name":"Vijay Akash",
     "role":"Web developer",
@@ -58,17 +72,3 @@ const roles=[{
     "profilePic":"https://woodsproduc.s3.amazonaws.com/uploads/item_media/asset/7186/vijay-sethupathi-Soodhu-Kavvum-Movie-still.jpg",
     "followed":true
   }];  
-
-  exports.handler = async event => {
-    console.log('event', event);
-
-    return {
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Methods': '*',
-            'Access-Control-Allow-Origin': '*',
-        },
-        statusCode: 200,
-        body: JSON.stringify(roles)
-    };
-};

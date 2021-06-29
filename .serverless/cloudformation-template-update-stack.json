@@ -107,6 +107,12 @@
         "LogGroupName": "/aws/lambda/serverlesstask-dev-getContacts"
       }
     },
+    "GetPeopleFromRDSLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/serverlesstask-dev-getPeopleFromRDS"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -181,7 +187,21 @@
               "lambdaRole"
             ]
           ]
-        }
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+              ]
+            ]
+          }
+        ]
       }
     },
     "GetDataLambdaFunction": {
@@ -191,7 +211,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverlesstask/dev/1624945714373-2021-06-29T05:48:34.373Z/serverlesstask.zip"
+          "S3Key": "serverless/serverlesstask/dev/1624969472722-2021-06-29T12:24:32.722Z/serverlesstask.zip"
         },
         "Handler": "lambdas/getData.handler",
         "Runtime": "nodejs12.x",
@@ -202,6 +222,15 @@
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
             "Arn"
+          ]
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-81eaa099"
+          ],
+          "SubnetIds": [
+            "subnet-e1fbe3ac",
+            "subnet-94c3c19a"
           ]
         }
       },
@@ -216,7 +245,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverlesstask/dev/1624945714373-2021-06-29T05:48:34.373Z/serverlesstask.zip"
+          "S3Key": "serverless/serverlesstask/dev/1624969472722-2021-06-29T12:24:32.722Z/serverlesstask.zip"
         },
         "Handler": "lambdas/getJobs.handler",
         "Runtime": "nodejs12.x",
@@ -227,6 +256,15 @@
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
             "Arn"
+          ]
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-81eaa099"
+          ],
+          "SubnetIds": [
+            "subnet-e1fbe3ac",
+            "subnet-94c3c19a"
           ]
         }
       },
@@ -241,7 +279,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverlesstask/dev/1624945714373-2021-06-29T05:48:34.373Z/serverlesstask.zip"
+          "S3Key": "serverless/serverlesstask/dev/1624969472722-2021-06-29T12:24:32.722Z/serverlesstask.zip"
         },
         "Handler": "lambdas/getRoles.handler",
         "Runtime": "nodejs12.x",
@@ -252,6 +290,15 @@
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
             "Arn"
+          ]
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-81eaa099"
+          ],
+          "SubnetIds": [
+            "subnet-e1fbe3ac",
+            "subnet-94c3c19a"
           ]
         }
       },
@@ -266,7 +313,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverlesstask/dev/1624945714373-2021-06-29T05:48:34.373Z/serverlesstask.zip"
+          "S3Key": "serverless/serverlesstask/dev/1624969472722-2021-06-29T12:24:32.722Z/serverlesstask.zip"
         },
         "Handler": "lambdas/getSuggestions.handler",
         "Runtime": "nodejs12.x",
@@ -277,6 +324,15 @@
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
             "Arn"
+          ]
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-81eaa099"
+          ],
+          "SubnetIds": [
+            "subnet-e1fbe3ac",
+            "subnet-94c3c19a"
           ]
         }
       },
@@ -291,7 +347,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverlesstask/dev/1624945714373-2021-06-29T05:48:34.373Z/serverlesstask.zip"
+          "S3Key": "serverless/serverlesstask/dev/1624969472722-2021-06-29T12:24:32.722Z/serverlesstask.zip"
         },
         "Handler": "lambdas/getConnectionData.handler",
         "Runtime": "nodejs12.x",
@@ -302,6 +358,15 @@
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
             "Arn"
+          ]
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-81eaa099"
+          ],
+          "SubnetIds": [
+            "subnet-e1fbe3ac",
+            "subnet-94c3c19a"
           ]
         }
       },
@@ -316,7 +381,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverlesstask/dev/1624945714373-2021-06-29T05:48:34.373Z/serverlesstask.zip"
+          "S3Key": "serverless/serverlesstask/dev/1624969472722-2021-06-29T12:24:32.722Z/serverlesstask.zip"
         },
         "Handler": "lambdas/getContacts.handler",
         "Runtime": "nodejs12.x",
@@ -328,70 +393,123 @@
             "IamRoleLambdaExecution",
             "Arn"
           ]
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-81eaa099"
+          ],
+          "SubnetIds": [
+            "subnet-e1fbe3ac",
+            "subnet-94c3c19a"
+          ]
         }
       },
       "DependsOn": [
         "GetContactsLogGroup"
       ]
     },
-    "GetDataLambdaVersionkYHzPsxJC2VupY2QCwvg0bOwJGsYcJsC3uwBaUvTw": {
+    "GetPeopleFromRDSLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/serverlesstask/dev/1624969472722-2021-06-29T12:24:32.722Z/serverlesstask.zip"
+        },
+        "Handler": "lambdas/getPeopleFromRDS.handler",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "serverlesstask-dev-getPeopleFromRDS",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-81eaa099"
+          ],
+          "SubnetIds": [
+            "subnet-e1fbe3ac",
+            "subnet-94c3c19a"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetPeopleFromRDSLogGroup"
+      ]
+    },
+    "GetDataLambdaVersionI0RrTELDftfKdQOVCYLT66PrTGbcl9xOWf5KgGp0I": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDataLambdaFunction"
         },
-        "CodeSha256": "qRgYry/2TQg5Knzkg/R2olvDMzzAAZHm8w74aIVgQSg="
+        "CodeSha256": "VWBVKx205ZDdDN71SR9jTyLcfRtd45POpGbjTbn3wb0="
       }
     },
-    "GetJobsLambdaVersionWg36ZhYuY1jkYWwdZqAyk2R0rZ6fgRya6DLvHNLG2U": {
+    "GetJobsLambdaVersion6QxLqeDKbmThG5l6CCdnvQ5XQwFujyeLSgiMmqilgI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetJobsLambdaFunction"
         },
-        "CodeSha256": "qRgYry/2TQg5Knzkg/R2olvDMzzAAZHm8w74aIVgQSg="
+        "CodeSha256": "VWBVKx205ZDdDN71SR9jTyLcfRtd45POpGbjTbn3wb0="
       }
     },
-    "GetRolesLambdaVersionwcJ6X0LaN802SyDAS4klB5NPk3mL7U7mYQITRXkbl0M": {
+    "GetRolesLambdaVersionwVhGymop3zYSht8ZIcTQeZYHSuCDmM0HKL4AqFnUQbA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetRolesLambdaFunction"
         },
-        "CodeSha256": "qRgYry/2TQg5Knzkg/R2olvDMzzAAZHm8w74aIVgQSg="
+        "CodeSha256": "VWBVKx205ZDdDN71SR9jTyLcfRtd45POpGbjTbn3wb0="
       }
     },
-    "GetSuggestionsLambdaVersionmyRJFwUo21O8icRcaAPd9DSt8t3jBI4htXAMDzl6g": {
+    "GetSuggestionsLambdaVersionng1MQKet2d0DlmFeUtWpV7pkyf9qdwKHuGsk6io1NM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSuggestionsLambdaFunction"
         },
-        "CodeSha256": "qRgYry/2TQg5Knzkg/R2olvDMzzAAZHm8w74aIVgQSg="
+        "CodeSha256": "VWBVKx205ZDdDN71SR9jTyLcfRtd45POpGbjTbn3wb0="
       }
     },
-    "GetConnectionDataLambdaVersion5utRIsQCJhM6dsEiC6CAg1oHDr6rC5qKAlk3CurkXY": {
+    "GetConnectionDataLambdaVersion3NQior00e9YiyNsr8etNQc1lbfRbR0AbWc2tev7EyQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetConnectionDataLambdaFunction"
         },
-        "CodeSha256": "qRgYry/2TQg5Knzkg/R2olvDMzzAAZHm8w74aIVgQSg="
+        "CodeSha256": "VWBVKx205ZDdDN71SR9jTyLcfRtd45POpGbjTbn3wb0="
       }
     },
-    "GetContactsLambdaVersionc1t1y7sYHOYbaxbHcuurMhkYEGzCc6QZAJsAtToS0": {
+    "GetContactsLambdaVersionJ5JIfgnFfmt0cOJ3q30PnOTYDxruooTPzInjgmB8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetContactsLambdaFunction"
         },
-        "CodeSha256": "qRgYry/2TQg5Knzkg/R2olvDMzzAAZHm8w74aIVgQSg="
+        "CodeSha256": "VWBVKx205ZDdDN71SR9jTyLcfRtd45POpGbjTbn3wb0="
+      }
+    },
+    "GetPeopleFromRDSLambdaVersionrLKQ5Lo857H7ruFhOS6pWANzYNFYRBH8mKgVm7OsM": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetPeopleFromRDSLambdaFunction"
+        },
+        "CodeSha256": "VWBVKx205ZDdDN71SR9jTyLcfRtd45POpGbjTbn3wb0="
       }
     },
     "ApiGatewayRestApi": {
@@ -491,6 +609,21 @@
           ]
         },
         "PathPart": "get-contacts",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceGetDashpeoples": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "get-peoples",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -760,6 +893,51 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceGetDashcontacts"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodGetDashpeoplesOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGetDashpeoples"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -1042,7 +1220,53 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1624945707774": {
+    "ApiGatewayMethodGetDashpeoplesGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceGetDashpeoples"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "ApiGatewayAuthorizer"
+        },
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "GetPeopleFromRDSLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1624969465789": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1057,12 +1281,14 @@
         "ApiGatewayMethodGetDashsuggestionsOptions",
         "ApiGatewayMethodGetDashconnectiondataOptions",
         "ApiGatewayMethodGetDashcontactsOptions",
+        "ApiGatewayMethodGetDashpeoplesOptions",
         "ApiGatewayMethodGetDashdataGet",
         "ApiGatewayMethodGetDashjobsGet",
         "ApiGatewayMethodGetDashrolesGet",
         "ApiGatewayMethodGetDashsuggestionsGet",
         "ApiGatewayMethodGetDashconnectiondataGet",
-        "ApiGatewayMethodGetDashcontactsGet"
+        "ApiGatewayMethodGetDashcontactsGet",
+        "ApiGatewayMethodGetDashpeoplesGet"
       ]
     },
     "GetDataLambdaPermissionApiGateway": {
@@ -1287,6 +1513,43 @@
         }
       }
     },
+    "GetPeopleFromRDSLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetPeopleFromRDSLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
     "CognitoUserPool": {
       "Type": "AWS::Cognito::UserPool",
       "Properties": {
@@ -1340,6 +1603,19 @@
           }
         ]
       }
+    },
+    "MyDB": {
+      "Type": "AWS::RDS::DBInstance",
+      "Properties": {
+        "DBInstanceIdentifier": "demodb",
+        "AllocatedStorage": "5",
+        "DBInstanceClass": "db.t2.micro",
+        "Engine": "MySQL",
+        "MasterUsername": "admin",
+        "MasterUserPassword": "password",
+        "PubliclyAccessible": true,
+        "Port": 3306
+      }
     }
   },
   "Outputs": {
@@ -1354,7 +1630,7 @@
     "GetDataLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDataLambdaVersionkYHzPsxJC2VupY2QCwvg0bOwJGsYcJsC3uwBaUvTw"
+        "Ref": "GetDataLambdaVersionI0RrTELDftfKdQOVCYLT66PrTGbcl9xOWf5KgGp0I"
       },
       "Export": {
         "Name": "sls-serverlesstask-dev-GetDataLambdaFunctionQualifiedArn"
@@ -1363,7 +1639,7 @@
     "GetJobsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetJobsLambdaVersionWg36ZhYuY1jkYWwdZqAyk2R0rZ6fgRya6DLvHNLG2U"
+        "Ref": "GetJobsLambdaVersion6QxLqeDKbmThG5l6CCdnvQ5XQwFujyeLSgiMmqilgI"
       },
       "Export": {
         "Name": "sls-serverlesstask-dev-GetJobsLambdaFunctionQualifiedArn"
@@ -1372,7 +1648,7 @@
     "GetRolesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetRolesLambdaVersionwcJ6X0LaN802SyDAS4klB5NPk3mL7U7mYQITRXkbl0M"
+        "Ref": "GetRolesLambdaVersionwVhGymop3zYSht8ZIcTQeZYHSuCDmM0HKL4AqFnUQbA"
       },
       "Export": {
         "Name": "sls-serverlesstask-dev-GetRolesLambdaFunctionQualifiedArn"
@@ -1381,7 +1657,7 @@
     "GetSuggestionsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSuggestionsLambdaVersionmyRJFwUo21O8icRcaAPd9DSt8t3jBI4htXAMDzl6g"
+        "Ref": "GetSuggestionsLambdaVersionng1MQKet2d0DlmFeUtWpV7pkyf9qdwKHuGsk6io1NM"
       },
       "Export": {
         "Name": "sls-serverlesstask-dev-GetSuggestionsLambdaFunctionQualifiedArn"
@@ -1390,7 +1666,7 @@
     "GetConnectionDataLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetConnectionDataLambdaVersion5utRIsQCJhM6dsEiC6CAg1oHDr6rC5qKAlk3CurkXY"
+        "Ref": "GetConnectionDataLambdaVersion3NQior00e9YiyNsr8etNQc1lbfRbR0AbWc2tev7EyQ"
       },
       "Export": {
         "Name": "sls-serverlesstask-dev-GetConnectionDataLambdaFunctionQualifiedArn"
@@ -1399,10 +1675,19 @@
     "GetContactsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetContactsLambdaVersionc1t1y7sYHOYbaxbHcuurMhkYEGzCc6QZAJsAtToS0"
+        "Ref": "GetContactsLambdaVersionJ5JIfgnFfmt0cOJ3q30PnOTYDxruooTPzInjgmB8"
       },
       "Export": {
         "Name": "sls-serverlesstask-dev-GetContactsLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetPeopleFromRDSLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetPeopleFromRDSLambdaVersionrLKQ5Lo857H7ruFhOS6pWANzYNFYRBH8mKgVm7OsM"
+      },
+      "Export": {
+        "Name": "sls-serverlesstask-dev-GetPeopleFromRDSLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {

@@ -1,4 +1,19 @@
 
+exports.handler = async event => {
+    console.log('event', event);
+
+    return {
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials' : true 
+        },
+        statusCode: 200,
+        body: JSON.stringify(jobs)
+    };
+};
+
 const jobs={"joblist":[{
     "id":1,
     "role":"Engineer - React Fullstack",
@@ -581,17 +596,3 @@ const jobs={"joblist":[{
                                       }
 
 ]}
-
-exports.handler = async event => {
-    console.log('event', event);
-
-    return {
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Methods': '*',
-            'Access-Control-Allow-Origin': '*',
-        },
-        statusCode: 200,
-        body: JSON.stringify(jobs)
-    };
-};
